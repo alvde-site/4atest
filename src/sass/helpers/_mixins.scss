@@ -1,0 +1,25 @@
+// Font mixin
+@mixin font-load($family, $name, $weight, $style) {
+  @font-face {
+    src: url("/src/fonts/" + $name + ".woff2") format("woff2");
+    src: url("/src/fonts/" + $name + ".woff") format("woff");
+    font-family: $family;
+    font-weight: $weight;
+    font-style: $style;
+    font-display: swap;
+  }
+}
+
+@mixin font($name) {
+  font-family:
+    $name,
+    sans-serif;
+}
+
+// Media mixin
+@mixin mw($width) {
+  // @media screen and (max-width: $width + "px")
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}

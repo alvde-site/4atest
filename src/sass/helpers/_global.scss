@@ -1,0 +1,96 @@
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  line-height: 1;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @include font("Inter");
+  font-weight: 400;
+  color: $white;
+  background-color: $white;
+}
+
+#root {
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+fieldset,
+ul {
+  margin: 0;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
+}
+
+input,
+button,
+select,
+a,
+textarea,
+label,
+div {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+}
+
+button,
+input,
+a {
+  &:focus {
+    outline: none;
+  }
+}
+
+button {
+  border: none;
+  padding: 0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background-clip: text;
+}
+
+#video {
+  clip-path: url("#clip");
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+}
