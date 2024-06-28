@@ -1,4 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSelector,
+  createSlice,
+} from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import { cardsText } from "../../service/constants";
 
@@ -88,11 +92,17 @@ export default postsSlice.reducer;
 
 export const selectAllCards = (state: RootState) => state.cards.cards;
 
-export const selectPopularCards = (state: RootState) =>
-  state.cards.cards.filter(c => c.isPopular);
+export const selectPopularCards = createSelector(
+  [(state: RootState) => state.cards],
+  cards => cards.cards.filter(c => c.isPopular),
+);
 
-export const selectDiscountCards = (state: RootState) =>
-  state.cards.cards.filter(c => c.isDiscount);
+export const selectDiscountCards = createSelector(
+  [(state: RootState) => state.cards],
+  cards => cards.cards.filter(c => c.isDiscount),
+);
 
-export const selectBaseCards = (state: RootState) =>
-  state.cards.cards.filter(c => !c.isPopular && !c.isDiscount);
+export const selectBaseCards = createSelector(
+  [(state: RootState) => state.cards],
+  cards => cards.cards.filter(c => !c.isPopular && !c.isDiscount),
+);

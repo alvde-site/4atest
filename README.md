@@ -1,29 +1,33 @@
-# Тестовое задание для ООО 4А.Консалтинг
 
-# vite-template-redux
+# Code example 4а
+Пример кода с применением технологий:
+* Flexbox, Grid, scss, module.css
+* Ajax, CRUD
+* Верстка по БЭМ(Nested)
+* Адаптивная верстка
+* Figma
+* React.js, typscript, redux
+* popup
+* ООП
+* JS Классы, замыкание
+* GSAP
+* Vite
 
-Uses [Vite](https://vitejs.dev/), [Vitest](https://vitest.dev/), and [React Testing Library](https://github.com/testing-library/react-testing-library) to create a modern [React](https://react.dev/) app compatible with [Create React App](https://create-react-app.dev/)
+## Сcылки
+(Открыть ссылку в новом окне: ctrl + shift + ссылка)
+* [Ссылка на выложенную на сервер работающую фронтенд часть приложения](https://fouratest.onrender.com/). (Если ссылка не работает, приложение можно протестировать локально. [Ниже](#инструкция-по-развертыванию) инструкция по развертыванию).
 
-```sh
-npx degit reduxjs/redux-templates/packages/vite-template-redux my-app
-```
 
-## Goals
+### У проекта следующий функционал:
+* Полученные от сервиса тарифы разложены на страницу в соответствии с [дизайном из figma](https://www.figma.com/design/73BP2Kfetj8KwVdI7Z6xq9/4a-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D0%BA%D0%BE%D0%B4%D0%B0?node-id=0-1&t=DudfYKbiIEZ2Nmdk-0).
+* На кнопку купить наложен анимационный эффект мигания (перехода у кнопки нет), отображается таймер на закрепленном хедере - при остатке в 30 сек таймер мигает и выделяется красным. 
+* Когда таймер заканчивается скидочные цены пропадают и остаются цены без скидки.
+* После этого появляется попап, где отображены ещё большие скидки, также полученные от сервиса.
+* При закрытии попапа отображаются тарифы без скидок.
 
-- Easy migration from Create React App or Vite
-- As beginner friendly as Create React App
-- Optimized performance compared to Create React App
-- Customizable without ejecting
 
-## Scripts
-
-- `dev`/`start` - start dev server and open browser
-- `build` - build for production
-- `preview` - locally preview production build
-- `test` - launch test runner
-
-## Inspiration
-
-- [Create React App](https://github.com/facebook/create-react-app/tree/main/packages/cra-template)
-- [Vite](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react)
-- [Vitest](https://github.com/vitest-dev/vitest/tree/main/examples/react-testing-lib)
+### Инструкция по развертыванию:
+* Клонировать проект: git clone git@github.com:alvde-site/4atest.git
+* Перейти в корневую директорию frontend и установить зависимости: npm install
+* Запустить frontend часть приложения на 3000 порту: npm run dev
+* Открыть в браузере страницу по адресу http://localhost:3000/

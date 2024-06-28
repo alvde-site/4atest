@@ -1,2 +1,153 @@
 @import "@/sass/helpers/variables";
 @import "@/sass/helpers/mixins.scss";
+
+.card {
+  & input:checked + &__details {
+    background-color: rgba($navy, 0.05);
+    border: 2px solid $navy;
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__details {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 19px;
+    border: 2px solid $grey3;
+    border-radius: 20px;
+    padding: 45px 23px 26px;
+    background-color: $white;
+    position: relative;
+    transition: $transition;
+    @include mw($ph) {
+      padding: 36px 46px 26px 24px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px 27px;
+    }
+  }
+
+  &:last-child {
+    grid-column: 1 / span 3;
+    @include mw($ph) {
+      grid-column: auto;
+    }
+    .card__title {
+      color: $black;
+      padding: 15% 0 0;
+      @include mw($ph) {
+        padding: 0;
+      }
+    }
+    .card__details {
+      grid-template-columns: 6fr 7fr 8fr;
+      gap: 20px;
+      @include mw($ph) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px 0;
+      }
+    }
+  }
+
+  &__rate {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    top: -30px;
+    right: 4px;
+    background: url("../../images/star.png") center/contain no-repeat;
+    align-items: center;
+    justify-content: center;
+    @include mw($ph) {
+      width: 50px;
+      height: 50px;
+      top: 2px;
+      right: 2px;
+    }
+    &-normal {
+      display: flex;
+    }
+    &-danger {
+      display: flex;
+    }
+    &-stopped {
+      display: none;
+    }
+  }
+
+  &__title {
+    @include font("Bebas Neue");
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 1;
+    color: $grey-title;
+    text-align: center;
+
+    @include mw($ph) {
+      font-size: 24px;
+      text-align: left;
+    }
+  }
+
+  &__prices {
+    grid-template-columns: 6fr 7fr 8fr;
+    @include mw($ph) {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+    }
+  }
+
+  &__price {
+    @include font("PTRootUIWebBold");
+    color: $black;
+    font-size: 50px;
+    line-height: 1.1;
+    text-align: right;
+
+    @include mw($ph) {
+      font-size: 44px;
+    }
+  }
+
+  &__discount {
+    @include font("PTRootUIWebRegular");
+    text-align: right;
+    color: $grey-light;
+    font-size: 24px;
+    line-height: 1;
+    text-decoration: line-through;
+    transition: $transition;
+
+    @include mw($ph) {
+      font-size: 20px;
+    }
+    &-stopped {
+      opacity: 0;
+    }
+  }
+
+  &__slogan {
+    @include font("PTRootUIWebRegular");
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.2;
+    color: $black-light;
+
+    @include mw($ph) {
+      font-size: 14px;
+      text-align: left;
+    }
+  }
+}
+
+.rate {
+  &__percent {
+    @include font("PTRootUIWebRegular");
+    font-size: 18px;
+    line-height: 1.3;
+    @include mw($ph) {
+      font-size: 13px;
+    }
+  }
+}

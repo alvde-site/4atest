@@ -6,14 +6,15 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba($white, 0.8);
+  z-index: 1;
+  background-color: rgba($white, 0.9);
   &__timer {
     margin: 0 auto;
   }
 
   @include mw($ph) {
     padding: 10px 0;
-  };
+  }
 }
 
 .timer {
@@ -31,7 +32,7 @@
 
     @include mw($ph) {
       font-size: 16px;
-    };
+    }
   }
 }
 
@@ -42,7 +43,6 @@
   &__numbers {
     display: flex;
     box-sizing: border-box;
-    color: $red;
     font-weight: bold;
     font-size: 60px;
     line-height: 1;
@@ -50,7 +50,16 @@
 
     @include mw($ph) {
       font-size: 40px;
-    };
+    }
+    &-normal {
+      color: $navy;
+    }
+    &-danger {
+      color: $red;
+    }
+    &-stopped {
+      color: $red;
+    }
   }
 
   &__number {
@@ -65,14 +74,14 @@
 
   &__separator {
     @include font("PTRootUIWebBold");
-    color: rgba($red, 0.5);
+    opacity: 0.5;
     font-size: 38px;
     line-height: 1.3;
     text-align: center;
 
     @include mw($ph) {
       font-size: 25px;
-    };
+    }
   }
 
   &__text {
@@ -84,6 +93,6 @@
 
     @include mw($ph) {
       font-size: 14px;
-    };
+    }
   }
 }

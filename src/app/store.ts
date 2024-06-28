@@ -2,10 +2,14 @@ import type { Action, ThunkAction } from "@reduxjs/toolkit";
 import { configureStore } from "@reduxjs/toolkit";
 
 import cardsSlice from "./reducers/cardsSlice";
+import popupSlice from "./reducers/popupSlice";
+import stateSlice from "./reducers/timerSlice";
 
 export const store = configureStore({
   reducer: {
     cards: cardsSlice,
+    popup: popupSlice,
+    timer: stateSlice,
   },
 });
 

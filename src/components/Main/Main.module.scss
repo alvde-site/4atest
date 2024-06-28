@@ -26,10 +26,24 @@
 
   &__wrap {
     display: grid;
-    grid-template-columns: 4fr 5fr;
+    grid-template-columns: 3fr 4fr;
     gap: 79px;
     max-width: 1098px;
     width: 100%;
     margin: 0 auto;
+    @include mw($dt) {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      align-content: center;
+    };
+  }
+
+  &__image {
+    max-width: 434px;
+    width: 100%;
+    display: block;
+    @include mw($dt) {
+      margin: 0 auto;
+    };
   }
 }

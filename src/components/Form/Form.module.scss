@@ -1,2 +1,111 @@
 @import "@/sass/helpers/variables";
 @import "@/sass/helpers/mixins.scss";
+
+.form {
+  max-width: 585px;
+  width: 100%;
+  @include mw($dt) {
+    margin: 0 auto;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px 12px;
+    padding: 28px 0 0;
+    margin: 0 0 12px;
+
+    @include mw($ph) {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 0;
+    }
+  }
+
+  &__info {
+    @include font("PTRootUIWebBold");
+    color: $black;
+    font-size: 18px;
+    line-height: 1;
+    margin: 0 0 26px;
+    @include mw($ph) {
+      font-size: 14px;
+      margin: 0 0 36px;
+    }
+  }
+
+  &__fieldset {
+    margin: 0 0 50px;
+    @include mw($ph) {
+      margin: 0 0 22px;
+    }
+  }
+
+  &__checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    &:checked + label::before {
+      background: url("../../images/checkbox.svg") center/contain no-repeat;
+    }
+  }
+
+  &__label {
+    display: block;
+    max-width: 418px;
+    width: 100%;
+    position: relative;
+    @include font("PTRootUIWebRegular");
+    color: $grey-light;
+    font-size: 16px;
+    line-height: 1;
+    padding: 0 0 0 36px;
+  }
+
+  &__label::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 0;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 1px solid $navy;
+    border-radius: 5px;
+    background: transparent;
+    margin-right: 20px;
+  }
+
+  &__link {
+    color: $blue;
+  }
+
+  &__submit {
+    width: 50%;
+    height: 70px;
+    border-radius: 60px;
+    border: none;
+    background: $red;
+    @include font("Rubik");
+    font-size: 20px;
+    font-weight: 500;
+    color: $white;
+    margin: 0 0 30px;
+    &:hover {
+      opacity: 0.5;
+    }
+    @include mw($ph) {
+      width: 100%;
+    }
+  }
+
+  &__privacy {
+    @include font("PTRootUIWebRegular");
+    font-size: 14px;
+    color: $grey-middle;
+    line-height: 1.3;
+    @include mw($ph) {
+      display: none;
+    }
+  }
+}

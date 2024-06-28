@@ -11,9 +11,7 @@
 }
 
 @mixin font($name) {
-  font-family:
-    $name,
-    sans-serif;
+  font-family: $name, sans-serif;
 }
 
 // Media mixin
@@ -22,4 +20,15 @@
   @media screen and (max-width: $width) {
     @content;
   }
+}
+
+@mixin vh() {
+  position: absolute;
+  overflow: hidden;
+  margin: -1px;
+  border: none;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  clip: rect(0, 0, 0, 0);
 }
