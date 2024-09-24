@@ -4,9 +4,6 @@
     "start_url": ".",
     "description": "Пример кода 4аТест",
     "display": "standalone",
-    "theme_color": "#1FC7D4",
-    "background_color": "#ffffff",
-    "orientation": "portrait",
     "id": "/src/images/metadata/",
     "icons": [
         {
