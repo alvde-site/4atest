@@ -4,7 +4,7 @@ import style from "./Form.module.scss";
 import Card from "../Card/Card";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { fetchCards, selectPopularCards } from "../../app/reducers/cardsSlice";
-import { Spinner } from "../Spinner/Spinner";
+import Loader from "../Loader/Loader";
 import type { TCard } from "../../app/reducers/cardsSlice";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -40,15 +40,25 @@ const Form: FC = () => {
   let content;
 
   if (cardsStatus === "loading") {
-    content = <Spinner text="Загрузка..." />;
+    content = <Loader />;
   } else if (cardsStatus === "succeeded") {
     if (popularCards) {
-      content = popularCards.map((card: TCard) => (
-        <Card key={card.id} card={card} />
-      ));
+      content = (
+        <div className={clsx(style.form__cards)}>
+          {popularCards.map((card: TCard) => (
+            <Card key={card.id} card={card} />
+          ))}
+        </div>
+      );
     }
   } else if (cardsStatus === "failed") {
-    content = <div>{error}</div>;
+    content = (
+      <>
+        <p
+          className={clsx(style.form__info)}
+        >{`Что-то пошло не так, карточки не загрузились. ${error}.`}</p>
+      </>
+    );
   }
 
   return (
@@ -56,7 +66,8 @@ const Form: FC = () => {
       className={clsx(style.content__form, style.form)}
       onSubmit={handleSubmit}
     >
-      <div className={clsx(style.form__cards)}>{content}</div>
+      {/* <div className={clsx(style.form__cards)}>{content}</div> */}
+      {content}
       <p className={clsx(style.form__info)}>
         Следуя плану на 3 месяца, люди получают в 2 раза лучший результат, чем
         за 1 месяц

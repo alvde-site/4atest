@@ -3,7 +3,7 @@ import { type FormEvent, useEffect, useState, type FC } from "react";
 import style from "./PopupForm.module.scss";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { fetchCards, selectDiscountCards } from "../../app/reducers/cardsSlice";
-import { Spinner } from "../Spinner/Spinner";
+import Loader from "../Loader/Loader";
 import type { TCard } from "../../app/reducers/cardsSlice";
 import PopupCard from "../PopupCard/PopupCard";
 import { closeAllPopups } from "../../app/reducers/popupSlice";
@@ -30,7 +30,7 @@ const PopupForm: FC = () => {
   let content;
 
   if (cardsStatus === "loading") {
-    content = <Spinner text="Загрузка..." />;
+    content = <Loader />;
   } else if (cardsStatus === "succeeded") {
     if (discountCards) {
       content = discountCards.map((card: TCard) => (
