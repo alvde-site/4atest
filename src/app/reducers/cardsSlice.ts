@@ -28,24 +28,45 @@ const initialState: ICardsState = {
   error: undefined,
 };
 
-export const fetchCards = createAsyncThunk("cards/fetchCards", async () => {
-  const response = await fetch("https://t-pay.iqfit.app/subscribe/list-test", {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then(res => {
-    return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`);
-  });
-  return response as TCard[];
-});
+const myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
 
-const postsSlice = createSlice({
+const myInit = {
+  headers: myHeaders,
+};
+
+//Server request
+const cardsRequest = new Request(
+  "https://t-pay.iqfit.app/subscribe/list-test",
+  myInit,
+);
+
+//If the server doesn't respond, a simulated 'fakeCardsRequest' request to the server will be used.
+const fakeCardsRequest = new Request("cardsBD.json", myInit);
+
+export const fetchCards = createAsyncThunk(
+  "cards/fetchCards",
+  async (isBackup: boolean) => {
+    const response = await fetch(
+      !isBackup ? cardsRequest : fakeCardsRequest,
+    ).then(res => {
+      return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`);
+    });
+    return response as TCard[];
+  },
+);
+
+const cardsSlice = createSlice({
   name: "cards",
   initialState,
-  reducers: {},
+  reducers: {
+    resetCardsStatus() {
+      return initialState;
+    },
+  },
   extraReducers(builder) {
     builder
-      .addCase(fetchCards.pending, (state, action) => {
+      .addCase(fetchCards.pending, state => {
         state.status = "loading";
       })
       .addCase(fetchCards.fulfilled, (state, action) => {
@@ -88,8 +109,6 @@ const postsSlice = createSlice({
   },
 });
 
-export default postsSlice.reducer;
-
 export const selectAllCards = (state: RootState) => state.cards.cards;
 
 export const selectPopularCards = createSelector(
@@ -106,3 +125,7 @@ export const selectBaseCards = createSelector(
   [(state: RootState) => state.cards],
   cards => cards.cards.filter(c => !c.isPopular && !c.isDiscount),
 );
+
+export const { resetCardsStatus } = cardsSlice.actions;
+
+export default cardsSlice.reducer;

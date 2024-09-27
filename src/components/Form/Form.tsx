@@ -3,7 +3,11 @@ import { type FormEvent, useEffect, useRef, useState, type FC } from "react";
 import style from "./Form.module.scss";
 import Card from "../Card/Card";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { fetchCards, selectPopularCards } from "../../app/reducers/cardsSlice";
+import {
+  fetchCards,
+  resetCardsStatus,
+  selectPopularCards,
+} from "../../app/reducers/cardsSlice";
 import Loader from "../Loader/Loader";
 import type { TCard } from "../../app/reducers/cardsSlice";
 import gsap from "gsap";
@@ -12,6 +16,13 @@ import { useGSAP } from "@gsap/react";
 const Form: FC = () => {
   const button = useRef(null);
   const [privacy, setPrivacy] = useState(true);
+  const [isBackup, setIsBackup] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const handleBackup = () => {
+    setIsBackup(true);
+    dispatch(resetCardsStatus());
+    dispatch(fetchCards(true));
+  };
   const dispatch = useAppDispatch();
   const popularCards = useAppSelector(selectPopularCards);
 
@@ -33,13 +44,20 @@ const Form: FC = () => {
 
   useEffect(() => {
     if (cardsStatus === "idle") {
-      dispatch(fetchCards());
+      dispatch(fetchCards(isBackup));
     }
-  }, [cardsStatus, dispatch]);
+    if (cardsStatus === "loading") {
+      setIsLoading(true);
+    }
+    if (cardsStatus === "succeeded" || cardsStatus === "failed") {
+      const timer = setTimeout(() => setIsLoading(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [cardsStatus, dispatch, isBackup]);
 
   let content;
 
-  if (cardsStatus === "loading") {
+  if (cardsStatus === "loading" || isLoading) {
     content = <Loader />;
   } else if (cardsStatus === "succeeded") {
     if (popularCards) {
@@ -56,7 +74,10 @@ const Form: FC = () => {
       <>
         <p
           className={clsx(style.form__info)}
-        >{`Что-то пошло не так, карточки не загрузились. ${error}.`}</p>
+        >{`Что-то карточки не загружаются😕. ${error}. Но можно запустить имитацию загрузки с сервера.`}</p>
+        <button onClick={handleBackup} className={clsx(style.form__submit)}>
+          ⤷ Запустить
+        </button>
       </>
     );
   }
@@ -66,7 +87,6 @@ const Form: FC = () => {
       className={clsx(style.content__form, style.form)}
       onSubmit={handleSubmit}
     >
-      {/* <div className={clsx(style.form__cards)}>{content}</div> */}
       {content}
       <p className={clsx(style.form__info)}>
         Следуя плану на 3 месяца, люди получают в 2 раза лучший результат, чем
